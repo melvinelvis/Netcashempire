@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NETCASHEMPIRE - Registration Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .logo {
+            color: #1a2a6c;
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            border-color: #1a2a6c;
+            outline: none;
+        }
+        
+        .phone-input {
+            display: flex;
+        }
+        
+        .country-code {
+            width: 30%;
+            margin-right: 10px;
+        }
+        
+        .phone-number {
+            width: 70%;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(to right, #243b88, #d32f2f);
+            transform: translateY(-2px);
+        }
+        
+        .secondary-btn {
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        .secondary-btn:hover {
+            background: #e0e0e0;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .mt-20 {
+            margin-top: 20px;
+        }
+        
+        .mt-30 {
+            margin-top: 30px;
+        }
+        
+        .terms {
+            font-size: 14px;
+            color: #666;
+            margin: 20px 0;
+        }
+        
+        .login-link {
+            margin-top: 20px;
+            color: #666;
+        }
+        
+        .login-link a {
+            color: #1a2a6c;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .payment-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .payment-card {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid #eee;
+        }
+        
+        .payment-card:hover {
+            background: #f0f0f0;
+            border-color: #1a2a6c;
+        }
+        
+        .payment-card.active {
+            background: #e3f2fd;
+            border-color: #1a2a6c;
+        }
+        
+        .payment-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #1a2a6c;
+        }
+        
+        .instructions {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        
+        .balance {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #2e7d32;
+            margin: 20px 0;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .dashboard-preview {
+            background: linear-gradient(135deg, #1a2a6c, #243b88);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .dashboard-preview h3 {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .feature-list {
+            list-style-type: none;
+        }
+        
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-list i {
+            margin-right: 10px;
+            color: #fdbb2d;
+        }
+        
+        .logout-btn {
+            display: block;
+            width: 100px;
+            margin: 20px auto 0;
+            padding: 10px;
+            background: transparent;
+            color: #1a2a6c;
+            border: 2px solid #1a2a6c;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .logout-btn:hover {
+            background: #1a2a6c;
+            color: white;
+        }
+        
+        .invited-by {
+            background: #fff8e1;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #ddd;
+            z-index: 1;
+        }
+        
+        .progress-step {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .progress-step.active {
+            background: #1a2a6c;
+            color: white;
+        }
+        
+        .progress-step.completed {
+            background: #4caf50;
+            color: white;
+        }
+        
+        .step-label {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .progress-step-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            flex: 1;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .remember-me input {
+            width: auto;
+            margin-right: 10px;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background: #4caf50;
+            color: white;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .toast.error {
+            background: #f44336;
+        }
+        
+        .user-info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .user-info p {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="toast" id="toast"></div>
+    
+    <div class="container">
+        <!-- Registration Card -->
+        <div class="card">
+            <div class="header">
+                <div class="logo">NETCASHEMPIRE</div>
+                <div class="tagline">Welcome & Join us by creating a free account!</div>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-step-wrapper">
+                    <div class="progress-step completed" id="step1">1</div>
+                    <div class="step-label">Register</div>
+                </div>
+                <div class="progress-step-wrapper">
+                    <div class="progress-step active" id="step2">2</div>
+                    <div class="step-label">Activate</div>
+                </div>
+                <div class="progress-step-wrapper">
+                    <div class="progress-step" id="step3">3</div>
+                    <div class="step-label">Dashboard</div>
+                </div>
+            </div>
+            
+            <h2>Sign Up</h2>
+            
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Your username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Your Email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mobile">Enter Mobile Number*</label>
+                    <div class="phone-input">
+                        <div class="country-code">
+                            <select id="countryCode">
+                               <option value="+213" data-flag="🇩🇿">+213 (DZ)</option>
+                                <option value="+244" data-flag="🇦🇴">+244 (AO)</option>
+                                <option value="+229" data-flag="🇧🇯">+229 (BJ)</option>
+                                <option value="+267" data-flag="🇧🇼">+267 (BW)</option>
+                                <option value="+226" data-flag="🇧🇫">+226 (BF)</option>
+                                <option value="+257" data-flag="🇧🇮">+257 (BI)</option>
+                                <option value="+238" data-flag="🇨🇻">+238 (CV)</option>
+                                <option value="+236" data-flag="🇨🇫">+236 (CF)</option>
+                                <option value="+235" data-flag="🇹🇩">+235 (TD)</option>
+                                <option value="+269" data-flag="🇰🇲">+269 (KM)</option>
+                                <option value="+243" data-flag="🇨🇩">+243 (CD)</option>
+                                <option value="+242" data-flag="🇨🇬">+242 (CG)</option>
+                                <option value="+225" data-flag="🇨🇮">+225 (CI)</option>
+                                <option value="+253" data-flag="🇩🇯">+253 (DJ)</option>
+                                <option value="+20" data-flag="🇪🇬">+20 (EG)</option>
+                                <option value="+240" data-flag="🇬🇶">+240 (GQ)</option>
+                                <option value="+291" data-flag="🇪🇷">+291 (ER)</option>
+                                <option value="+268" data-flag="🇸🇿">+268 (SZ)</option>
+                                <option value="+251" data-flag="🇪🇹">+251 (ET)</option>
+                                <option value="+241" data-flag="🇬🇦">+241 (GA)</option>
+                                <option value="+220" data-flag="🇬🇲">+220 (GM)</option>
+                                <option value="+233" data-flag="🇬🇭">+233 (GH)</option>
+                                <option value="+224" data-flag="🇬🇳">+224 (GN)</option>
+                                <option value="+245" data-flag="🇬🇼">+245 (GW)</option>
+                                <option value="+254" data-flag="🇰🇪">+254 (KE)</option>
+                                <option value="+266" data-flag="🇱🇸">+266 (LS)</option>
+                                <option value="+231" data-flag="🇱🇷">+231 (LR)</option>
+                                <option value="+218" data-flag="🇱🇾">+218 (LY)</option>
+                                <option value="+261" data-flag="🇲🇬">+261 (MG)</option>
+                                <option value="+265" data-flag="🇲🇼">+265 (MW)</option>
+                                <option value="+223" data-flag="🇲🇱">+223 (ML)</option>
+                                <option value="+222" data-flag="🇲🇷">+222 (MR)</option>
+                                <option value="+230" data-flag="🇲🇺">+230 (MU)</option>
+                                <option value="+262" data-flag="🇾🇹">+262 (YT)</option>
+                                <option value="+212" data-flag="🇲🇦">+212 (MA)</option>
+                                <option value="+258" data-flag="🇲🇿">+258 (MZ)</option>
+                                <option value="+264" data-flag="🇳🇦">+264 (NA)</option>
+                                <option value="+227" data-flag="🇳🇪">+227 (NE)</option>
+                                <option value="+234" data-flag="🇳🇬">+234 (NG)</option>
+                                <option value="+250" data-flag="🇷🇼">+250 (RW)</option>
+                                <option value="+262" data-flag="🇷🇪">+262 (RE)</option>
+                                <option value="+290" data-flag="🇸🇭">+290 (SH)</option>
+                                <option value="+248" data-flag="🇸🇨">+248 (SC)</option>
+                                <option value="+232" data-flag="🇸🇱">+232 (SL)</option>
+                                <option value="+252" data-flag="🇸🇴">+252 (SO)</option>
+                                <option value="+27" data-flag="🇿🇦">+27 (ZA)</option>
+                                <option value="+211" data-flag="🇸🇸">+211 (SS)</option>
+                                <option value="+249" data-flag="🇸🇩">+249 (SD)</option>
+                                <option value="+255" data-flag="🇹🇿">+255 (TZ)</option>
+                                <option value="+228" data-flag="🇹🇬">+228 (TG)</option>
+                                <option value="+216" data-flag="🇹🇳">+216 (TN)</option>
+                                <option value="+256" data-flag="🇺🇬">+256 (UG)</option>
+                                <option value="+260" data-flag="🇿🇲">+260 (ZM)</option>
+                                <option value="+263" data-flag="🇿🇼">+263 (ZW)</option>    </select>
+                        </div>
+                        <div class="phone-number">
+                            <input type="tel" id="mobile" placeholder="201-555-0123" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" placeholder="confirm password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="country">Your Country*</label>
+                    <select id="country" required>
+                        <option value="Algeria" data-flag="🇩🇿">Algeria</option>
+                        <option value="Angola" data-flag="🇦🇴">Angola</option>
+                        <option value="Benin" data-flag="🇧🇯">Benin</option>
+                        <option value="Botswana" data-flag="🇧🇼">Botswana</option>
+                        <option value="Burkina Faso" data-flag="🇧🇫">Burkina Faso</option>
+                        <option value="Burundi" data-flag="🇧🇮">Burundi</option>
+                        <option value="Cabo Verde" data-flag="🇨🇻">Cabo Verde</option>
+                        <option value="Cameroon" data-flag="🇨🇲">Cameroon</option>
+                        <option value="Central African Republic" data-flag="🇨🇫">Central African Republic</option>
+                        <option value="Chad" data-flag="🇹🇩">Chad</option>
+                        <option value="Comoros" data-flag="🇰🇲">Comoros</option>
+                        <option value="Congo" data-flag="🇨🇬">Congo</option>
+                        <option value="DR Congo" data-flag="🇨🇩">DR Congo</option>
+                        <option value="Djibouti" data-flag="🇩🇯">Djibouti</option>
+                        <option value="Egypt" data-flag="🇪🇬">Egypt</option>
+                        <option value="Equatorial Guinea" data-flag="🇬🇶">Equatorial Guinea</option>
+                        <option value="Eritrea" data-flag="🇪🇷">Eritrea</option>
+                        <option value="Eswatini" data-flag="🇸🇿">Eswatini</option>
+                        <option value="Ethiopia" data-flag="🇪🇹">Ethiopia</option>
+                        <option value="Gabon" data-flag="🇬🇦">Gabon</option>
+                        <option value="Gambia" data-flag="🇬🇲">Gambia</option>
+                        <option value="Ghana" data-flag="🇬🇭">Ghana</option>
+                        <option value="Guinea" data-flag="🇬🇳">Guinea</option>
+                        <option value="Guinea-Bissau" data-flag="🇬🇼">Guinea-Bissau</option>
+                        <option value="Ivory Coast" data-flag="🇨🇮">Ivory Coast</option>
+                        <option value="Kenya" data-flag="🇰🇪">Kenya</option>
+                        <option value="Lesotho" data-flag="🇱🇸">Lesotho</option>
+                        <option value="Liberia" data-flag="🇱🇷">Liberia</option>
+                        <option value="Libya" data-flag="🇱🇾">Libya</option>
+                        <option value="Madagascar" data-flag="🇲🇬">Madagascar</option>
+                        <option value="Malawi" data-flag="🇲🇼">Malawi</option>
+                        <option value="Mali" data-flag="🇲🇱">Mali</option>
+                        <option value="Mauritania" data-flag="🇲🇷">Mauritania</option>
+                        <option value="Mauritius" data-flag="🇲🇺">Mauritius</option>
+                        <option value="Morocco" data-flag="🇲🇦">Morocco</option>
+                        <option value="Mozambique" data-flag="🇲🇿">Mozambique</option>
+                        <option value="Namibia" data-flag="🇳🇦">Namibia</option>
+                        <option value="Niger" data-flag="🇳🇪">Niger</option>
+                        <option value="Nigeria" data-flag="🇳🇬">Nigeria</option>
+                        <option value="Rwanda" data-flag="🇷🇼">Rwanda</option>
+                        <option value="Sao Tome and Principe" data-flag="🇸🇹">Sao Tome and Principe</option>
+                        <option value="Senegal" data-flag="🇸🇳">Senegal</option>
+                        <option value="Seychelles" data-flag="🇸🇨">Seychelles</option>
+                        <option value="Sierra Leone" data-flag="🇸🇱">Sierra Leone</option>
+                        <option value="Somalia" data-flag="🇸🇴">Somalia</option>
+                        <option value="South Africa" data-flag="🇿🇦">South Africa</option>
+                        <option value="South Sudan" data-flag="🇸🇸">South Sudan</option>
+                        <option value="Sudan" data-flag="🇸🇩">Sudan</option>
+                        <option value="Tanzania" data-flag="🇹🇿">Tanzania</option>
+                        <option value="Togo" data-flag="🇹🇬">Togo</option>
+                        <option value="Tunisia" data-flag="🇹🇳">Tunisia</option>
+                        <option value="Uganda" data-flag="🇺🇬">Uganda</option>
+                        <option value="Zambia" data-flag="🇿🇲">Zambia</option>
+                        <option value="Zimbabwe" data-flag="🇿🇼">Zimbabwe</option> 
+                    </select>
+                </div>
+                
+                <div class="invited-by">
+                    Powered By KNB Management
+                </div>
+                
+                <div class="terms">
+                    By creating an account you agree to our Terms & Conditions and Privacy Policy.
+                </div>
+                
+                <button type="submit" class="btn" id="registerBtn">Create Account</button>
+                
+                <div class="login-link">
+                    Already have an account? <a href="#" id="loginLink">Sign In</a>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Login/Activation Card -->
+        <div class="card">
+            <div class="header">
+                <div class="logo">NETCASHEMPIRE</div>
+            </div>
+            
+            <!-- Login Form -->
+            <div id="loginTab" class="tab-content active">
+                <h2>Login</h2>
+                <div class="tagline">Welcome back! Enter your credentials to sign in.</div>
+                
+                <div class="form-group">
+                    <label for="loginUsername">Username or Email</label>
+                    <input type="text" id="loginUsername" placeholder="Your username or email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="password">
+                </div>
+                
+                <div class="remember-me">
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Remember me</label>
+                </div>
+                
+                <button type="button" class="btn" id="loginBtn">Sign In</button>
+                
+                <div class="text-center mt-20">
+                    <a href="#" style="color: #1a2a6c; text-decoration: none;">Forgot password? Reset here</a>
+                </div>
+                
+                <div class="login-link">
+                    Don't have an account? <a href="#" id="signupLink">Sign Up</a>
+                </div>
+            </div>
+            
+            <!-- Activation Options -->
+            <div id="activationTab" class="tab-content">
+                <h2>ACCOUNT ACTIVATION</h2>
+                <div class="tagline">Welcome! Select below to proceed with activation</div>
+                
+                <div class="user-info" id="userInfo">
+                    <p><strong>Username:</strong> <span id="displayUsername"></span></p>
+                    <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+                    <p><strong>Status:</strong> <span style="color: #f44336;">Not Activated</span></p>
+                </div>
+                
+                <div class="payment-options">
+                    <div class="payment-card active" id="airtelOption">
+                        <div class="payment-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                       </div>
+                        <div>Pay with Airtel UGANDA</div>
+                    </div>
+                    
+                    <div class="payment-card" id="mtnOption">
+                        <div class="payment-icon">
+                            <i class="fas fa-sim-card"></i>
+                        </div>
+                        <div>Pay with MTN UGANDA</div>
+                    </div>
+                </div>
+                
+                <button type="button" class="btn mt-20" id="dashboardBtn">GO TO DASHBOARD</button>
+            </div>
+            
+            <!-- Airtel Payment Instructions -->
+            <div id="airtelTab" class="tab-content">
+                <h2>Pay with <strong>AIRTEL (AUTOMATIC ACTIVATION)</strong></h2>
+                <div class="tagline">Follow these steps to pay your activation fee</div>
+                
+                <div class="balance">
+                    Username: <span id="airtelUsername"></span><br>
+                    Remaining Balance: UGX 18,000
+                </div>
+                
+                <div class="instructions">
+                    <ol>
+                        <li><strong>Dial *185*9# on your Airtel Sim.</strong></li>
+                        <li><strong>Put ID 4364896</strong></li>
+                        <li><strong>Enter Amount - UGX 18000</strong></li>
+                        <li><strong>Enter your username reference</strong></li>
+                        <li><strong>Confirm - SCITECH INVESTMENTS GROUP</strong></li>
+                        <li><strong>Enter PIN</strong></li>
+                    </ol>
+                </div>
+                
+                <div class="form-group mt-20">
+                    <label for="airtelNumber">Enter Number used to pay (Start with 2567…)</label>
+                    <input type="tel" id="airtelNumber" placeholder="Your airtel number used to" required pattern="2567[0-9]{7}" title="Please enter a valid Airtel number starting with 2567">
+                </div>
+                
+                <button type="button" class="btn mt-20" id="airtelPayBtn">Complete Payment</button>
+                
+                <div class="payment-options mt-20">
+                    <div class="payment-card" id="switchToMtn">
+                        <div class="payment-icon">
+                            <i class="fas fa-sim-card"></i>
+                        </div>
+                        <div>Pay With MTN</div>
+                    </div>
+                </div>
+                
+                <button type="button" class="logout-btn">LOGOUT</button>
+            </div>
+            
+            <!-- MTN Payment Instructions -->
+            <div id="mtnTab" class="tab-content">
+                <h2>Pay with <strong>MTN (AUTOMATIC ACTIVATION)</strong></h2>
+                <div class="tagline">Follow these steps to pay your activation fee</div>
+                
+                <div class="balance">
+                    Username: <span id="mtnUsername"></span><br>
+                    Remaining Balance: UGX 18,000
+                </div>
+                
+                <div class="instructions">
+                    <ol>
+                        <li><strong>Dial *165*3# on your MTN Sim.</strong></li>
+                        <li><strong>Put ID 303326</strong></li>
+                        <li><strong>Enter Amount - UGX 18000</strong></li>
+                        <li><strong>Select Pay Using Mobile Money</strong></li>
+                        <li><strong>Confirm - SCITECH INVESTMENTS GROUP</strong></li>
+                        <li><strong>Enter PIN</strong></li>
+                    </ol>
+                </div>
+                
+                <div class="form-group mt-20">
+                    <label for="mtnNumber">Enter Number used to pay (Start with 2567…)</label>
+                    <input type="tel" id="mtnNumber" placeholder="Your mtn number used to" required pattern="2567[0-9]{7}" title="Please enter a valid MTN number starting with 2567">
+                </div>
+                
+                <button type="button" class="btn mt-20" id="mtnPayBtn">Complete Payment</button>
+                
+                <div class="payment-options mt-20">
+                    <div class="payment-card" id="switchToAirtel">
+                        <div class="payment-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div>Pay With Airtel</div>
+                    </div>
+                </div>
+                
+                <button type="button" class="logout-btn">LOGOUT</button>
+            </div>
+            
+            <!-- Dashboard Preview -->
+            <div id="dashboardTab" class="tab-content">
+                <h2>NETCASHEMPIRE DASHBOARD</h2>
+                
+                <div class="user-info">
+                    <p><strong>Username:</strong> <span id="dashboardUsername"></span></p>
+                    <p><strong>Email:</strong> <span id="dashboardEmail"></span></p>
+                    <p><strong>Status:</strong> <span style="color: #4caf50;">Active</span></p>
+                    <p><strong>Activation Date:</strong> <span id="activationDate"></span></p>
+                </div>
+                
+                <div class="dashboard-preview">
+                    <h3>Welcome, <span id="welcomeUsername"></span>!</h3>
+                    <p>Your account has been successfully activated.</p>
+                    
+                    <ul class="feature-list mt-30">
+                        <li><i class="fas fa-play-circle"></i> Access to 124M+ Earning Tasks</li>
+                        <li><i class="fas fa-film"></i> 12M+ Chat and Earn with Global Users
+</li>
+                        <li><i class="fas fa-basketball-ball"></i> Listen to music and earn
+</li>
+                        <li><i class="fas fa-tv"></i> Post on WhatsApp Status and earn
+</li>
+                        <li><i class="fas fa-download"></i> Fast Withdrawals via MTN and Airtel
+</li>
+                    </ul>
+                </div>
+                
+                <button type="button" class="btn mt-20">START STREAMING</button>
+                
+                <button type="button" class="logout-btn">LOGOUT</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const registrationForm = document.getElementById('registrationForm');
+        const registerBtn = document.getElementById('registerBtn');
+        const loginBtn = document.getElementById('loginBtn');
+        const loginLink = document.getElementById('loginLink');
+        const signupLink = document.getElementById('signupLink');
+        const dashboardBtn = document.getElementById('dashboardBtn');
+        const airtelOption = document.getElementById('airtelOption');
+        const mtnOption = document.getElementById('mtnOption');
+        const airtelPayBtn = document.getElementById('airtelPayBtn');
+        const mtnPayBtn = document.getElementById('mtnPayBtn');
+        const switchToMtn = document.getElementById('switchToMtn');
+        const switchToAirtel = document.getElementById('switchToAirtel');
+        const toast = document.getElementById('toast');
+        
+        // Tabs
+        const loginTab = document.getElementById('loginTab');
+        const activationTab = document.getElementById('activationTab');
+        const airtelTab = document.getElementById('airtelTab');
+        const mtnTab = document.getElementById('mtnTab');
+        const dashboardTab = document.getElementById('dashboardTab');
+        
+        // Progress steps
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const step3 = document.getElementById('step3');
+        
+        // User info display elements
+        const displayUsername = document.getElementById('displayUsername');
+        const displayEmail = document.getElementById('displayEmail');
+        const airtelUsername = document.getElementById('airtelUsername');
+        const mtnUsername = document.getElementById('mtnUsername');
+        const dashboardUsername = document.getElementById('dashboardUsername');
+        const dashboardEmail = document.getElementById('dashboardEmail');
+        const welcomeUsername = document.getElementById('welcomeUsername');
+        const activationDate = document.getElementById('activationDate');
+        
+        // Current user
+        let currentUser = null;
+        
+        // Show toast message
+        function showToast(message, isError = false) {
+            toast.textContent = message;
+            toast.className = 'toast show';
+            if (isError) {
+                toast.classList.add('error');
+            }
+            
+            setTimeout(() => {
+                toast.className = 'toast';
+            }, 3000);
+        }
+        
+        // Show tab function
+        function showTab(tab) {
+            // Hide all tabs
+            loginTab.classList.remove('active');
+            activationTab.classList.remove('active');
+            airtelTab.classList.remove('active');
+            mtnTab.classList.remove('active');
+            dashboardTab.classList.remove('active');
+            
+            // Show the selected tab
+            tab.classList.add('active');
+        }
+        
+        // Update progress steps
+        function updateProgress(step) {
+            // Reset all steps
+            step1.className = 'progress-step';
+            step2.className = 'progress-step';
+            step3.className = 'progress-step';
+            
+            // Activate appropriate steps
+            if (step >= 1) step1.className = 'progress-step completed';
+            if (step >= 2) step2.className = 'progress-step active';
+            if (step >= 3) step3.className = 'progress-step completed';
+        }
+        
+        // Save user to localStorage
+        function saveUser(user) {
+            // Get existing users or initialize empty array
+            const users = JSON.parse(localStorage.getItem('netcashempire_users')) || [];
+            
+            // Check if username already exists
+            const existingUserIndex = users.findIndex(u => u.username === user.username);
+            
+            if (existingUserIndex !== -1) {
+                // Update existing user
+                users[existingUserIndex] = user;
+            } else {
+                // Add new user
+                users.push(user);
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('netcashempire_users', JSON.stringify(users));
+            
+            // Also save as current user
+            localStorage.setItem('netcashempire_current_user', JSON.stringify(user));
+            currentUser = user;
+        }
+        
+        // Get user from localStorage
+        function getUser(username) {
+            const users = JSON.parse(localStorage.getItem('netcashempire_users')) || [];
+            return users.find(user => user.username === username);
+        }
+        
+        // Check if user is logged in
+        function checkLoggedIn() {
+            const user = JSON.parse(localStorage.getItem('netcashempire_current_user'));
+            if (user) {
+                currentUser = user;
+                showTab(activationTab);
+                displayUserInfo();
+                updateProgress(2);
+                return true;
+            }
+            return false;
+        }
+        
+        // Display user info
+        function displayUserInfo() {
+            if (currentUser) {
+                displayUsername.textContent = currentUser.username;
+                displayEmail.textContent = currentUser.email;
+                airtelUsername.textContent = currentUser.username;
+                mtnUsername.textContent = currentUser.username;
+                dashboardUsername.textContent = currentUser.username;
+                dashboardEmail.textContent = currentUser.email;
+                welcomeUsername.textContent = currentUser.username;
+                
+                // Set activation date to today
+                const today = new Date();
+                activationDate.textContent = today.toLocaleDateString();
+            }
+        }
+        
+        // Event Listeners
+        registrationForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const mobile = document.getElementById('mobile').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const country = document.getElementById('country').value;
+            
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                showToast('Passwords do not match!', true);
+                return;
+            }
+            
+            // Create user object
+            const user = {
+                username,
+                email,
+                mobile,
+                password,
+                country,
+                activated: false,
+                registrationDate: new Date().toISOString()
+            };
+            
+            // Save user
+            saveUser(user);
+            
+            showToast('Registration successful! Please proceed to activation.');
+            showTab(activationTab);
+            displayUserInfo();
+            updateProgress(2);
+        });
+        
+        loginBtn.addEventListener('click', () => {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+            
+            // Get user from storage
+            const user = getUser(username);
+            
+            if (user && user.password === password) {
+                // Save as current user
+                currentUser = user;
+                if (rememberMe) {
+                    localStorage.setItem('netcashempire_current_user', JSON.stringify(user));
+                }
+                
+                showToast('Login successful!');
+                showTab(activationTab);
+                displayUserInfo();
+                updateProgress(2);
+            } else {
+                showToast('Invalid username or password!', true);
+            }
+        });
+        
+        loginLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showTab(loginTab);
+        });
+        
+        signupLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showTab(loginTab);
+        });
+        
+        dashboardBtn.addEventListener('click', () => {
+            if (currentUser && currentUser.activated) {
+                showTab(dashboardTab);
+                updateProgress(3);
+            } else {
+                showToast('Please activate your account first!', true);
+            }
+        });
+        
+        airtelOption.addEventListener('click', () => {
+            airtelOption.classList.add('active');
+            mtnOption.classList.remove('active');
+            showTab(airtelTab);
+        });
+        
+        mtnOption.addEventListener('click', () => {
+            mtnOption.classList.add('active');
+            airtelOption.classList.remove('active');
+            showTab(mtnTab);
+        });
+        
+        airtelPayBtn.addEventListener('click', () => {
+            const airtelNumber = document.getElementById('airtelNumber').value;
+            
+            if (airtelNumber && airtelNumber.startsWith('2567')) {
+                // Activate user
+                currentUser.activated = true;
+                currentUser.paymentMethod = 'Airtel';
+                currentUser.paymentNumber = airtelNumber;
+                currentUser.activationDate = new Date().toISOString();
+                
+                // Save updated user
+                saveUser(currentUser);
+                
+                showToast('Payment successful! Your account is now activated.');
+                showTab(dashboardTab);
+                updateProgress(3);
+            } else {
+                showToast('Please enter a valid Airtel number starting with 2567', true);
+            }
+        });
+        
+        mtnPayBtn.addEventListener('click', () => {
+            const mtnNumber = document.getElementById('mtnNumber').value;
+            
+            if (mtnNumber && mtnNumber.startsWith('2567')) {
+                // Activate user
+                currentUser.activated = true;
+                currentUser.paymentMethod = 'MTN';
+                currentUser.paymentNumber = mtnNumber;
+                currentUser.activationDate = new Date().toISOString();
+                
+                // Save updated user
+                saveUser(currentUser);
+                
+                showToast('Payment successful! Your account is now activated.');
+                showTab(dashboardTab);
+                updateProgress(3);
+            } else {
+                showToast('Please enter a valid MTN number starting with 2567', true);
+            }
+        });
+        
+        switchToMtn.addEventListener('click', () => {
+            showTab(mtnTab);
+            mtnOption.classList.add('active');
+            airtelOption.classList.remove('active');
+        });
+        
+        switchToAirtel.addEventListener('click', () => {
+            showTab(airtelTab);
+            airtelOption.classList.add('active');
+            mtnOption.classList.remove('active');
+        });
+        
+        // Logout buttons
+        document.querySelectorAll('.logout-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (confirm('Are you sure you want to logout?')) {
+                    localStorage.removeItem('netcashempire_current_user');
+                    currentUser = null;
+                    showTab(loginTab);
+                    updateProgress(1);
+                    registrationForm.reset();
+                }
+            });
+        });
+        
+        // Initialize
+        window.addEventListener('DOMContentLoaded', () => {
+            // Check if user is already logged in
+            if (!checkLoggedIn()) {
+                updateProgress(1);
+            }
+            
+            // Check if there's a remembered user
+            const rememberedUser = localStorage.getItem('netcashempire_current_user');
+            if (rememberedUser) {
+                const user = JSON.parse(rememberedUser);
+                document.getElementById('loginUsername').value = user.username;
+                document.getElementById('rememberMe').checked = true;
+            }
+        });
+    </script>
+</body>
+</html>
